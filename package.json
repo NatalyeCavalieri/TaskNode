@@ -1,0 +1,18 @@
+{
+  "name": "tasknode",
+  "version": "1.0.0",
+  "description": "task management API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js"
+  },
+  "author": "Natalye Cavalieri Rodrigues",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
