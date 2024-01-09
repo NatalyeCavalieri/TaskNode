@@ -35,8 +35,8 @@ class UsersController{
    if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id){
     throw new AppError ("This email already exists")
    }
-   user.name = name
-   user.email = email 
+   user.name = name ?? user.name
+   user.email = email ?? user.email
 
    if(password && !old_password){
     throw new AppError("You need inform the old password")
