@@ -22,6 +22,16 @@ async create(request, response){
   response.json()
 
 }
+
+async show(request, response){
+  const { id } = request.params
+  const task = await knex("tasks").where({id}).first()
+  const tags = await knex("tags").where({task_id: id}).orderBy("name")
+  return response.json({
+    ...task,
+    tags
+  })
+}
 }
 
 module.exports = TasksController

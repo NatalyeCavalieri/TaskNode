@@ -7,5 +7,6 @@ const tasksRoutes = Router()
 const tasksController = new TasksController()
 
 tasksRoutes.post("/:user_id", tasksController.create)
+tasksRoutes.get("/:id", tasksController.show)
 
 module.exports = tasksRoutes
