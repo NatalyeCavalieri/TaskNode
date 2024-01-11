@@ -38,6 +38,12 @@ class TasksController {
     await knex("tasks").where({ id }).delete()
     return response.json()
   }
+
+  async index(request, response){
+    const {user_id} = request.query
+    const tasks = await knex("tasks").where({user_id}).orderBy("title")
+    return response.json(tasks)
+  }
 }
 
 module.exports = TasksController
