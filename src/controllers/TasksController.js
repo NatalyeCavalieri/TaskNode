@@ -40,8 +40,11 @@ class TasksController {
   }
 
   async index(request, response){
-    const {user_id} = request.query
-    const tasks = await knex("tasks").where({user_id}).orderBy("title")
+    const {title, user_id} = request.query
+    const tasks = await knex("tasks")
+    .where({user_id})
+    .whereLike("title", `%${title}%`)
+    .orderBy("title")
     return response.json(tasks)
   }
 }
