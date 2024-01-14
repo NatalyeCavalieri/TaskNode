@@ -46,7 +46,14 @@ class TasksController {
 
     if(tags){
       const filterTags = tags.split(',').map(tag => tag.trim())
-      tasks = await knex("tags").whereIn("name", filterTags)
+      tasks = await knex("tags")
+        .select(["tasks.id", "tasks.title", "tasks.user_id"])
+        .where("tasks.user_id", user_id)
+        .whereLike("tasks.title", `%${title}%`)
+        .whereIn("name", filterTags)
+        .innerJoin("tasks", "tasks.id", "tags.task_id")
+        .orderBy("tasks.title")
+
     }else{
       tasks = await knex("tasks")
       .where({user_id})
