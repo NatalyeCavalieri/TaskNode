@@ -60,7 +60,16 @@ class TasksController {
       .whereLike("title", `%${title}%`)
       .orderBy("title")
     }
-    return response.json(tasks)
+
+    const userTags = await knex("tags").where({user_id})
+    const tasksWithTags = tasks.map(task => {
+      const taskTags = userTags.filter(tag => tag.task_id === task.id)
+      return{
+        ...task,
+        tags: taskTags
+      }
+    })
+    return response.json(tasksWithTags)
   }
 }
 
